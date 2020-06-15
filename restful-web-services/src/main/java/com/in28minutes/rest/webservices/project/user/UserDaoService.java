@@ -31,4 +31,14 @@ public class UserDaoService {
 		users.add(user);
 		return user;
 	}
+
+	private User findOneUser(int id) {
+		for (User user : users) {
+			if (user.getId() == id) {
+				return user;
+			}
+		}
+
+		return null;
+	}
 }
