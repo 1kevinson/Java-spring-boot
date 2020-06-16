@@ -24,12 +24,12 @@ public class UserDaoService {
 		return users;
 	}
 
-	public List<User> save(User user) {
+	public User save(User user) {
 		if (user.getId() == null) {
 			user.setId(userCount++);
 		}
 		users.add(user);
-		return users;
+		return user;
 	}
 
 	public User findOneUser(int id) {
