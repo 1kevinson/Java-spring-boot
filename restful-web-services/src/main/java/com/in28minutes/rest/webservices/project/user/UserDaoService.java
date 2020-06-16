@@ -32,7 +32,7 @@ public class UserDaoService {
 		return user;
 	}
 
-	private User findOneUser(int id) {
+	public User findOneUser(int id) {
 		for (User user : users) {
 			if (user.getId() == id) {
 				return user;
