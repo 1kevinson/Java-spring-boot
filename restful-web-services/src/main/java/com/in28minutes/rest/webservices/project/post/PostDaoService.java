@@ -72,9 +72,9 @@ public class PostDaoService {
 		return post;
 	}
 
-	public Post findOnePost(int id) {
+	public Post findOnePost(int postId, int userId) {
 		for (Post post : posts) {
-			if (post.getId() == id) {
+			if ((post.getId() == postId) && (post.getUser().getId() == userId)) {
 				return post;
 			}
 		}

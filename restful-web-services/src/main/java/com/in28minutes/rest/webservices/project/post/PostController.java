@@ -45,21 +45,13 @@ public class PostController {
 		return ResponseEntity.created(location).build();
 	}
 
-	/*
-	 * @GetMapping("/users/{id}") public User retrieveOneUser(@PathVariable int id)
-	 * { User user = service.findOneUser(id);
-	 * 
-	 * if (user == null) throw new UserNotFoundException("id - " + id);
-	 * 
-	 * return user; }
-	 * 
-	 * @PostMapping("/users") public ResponseEntity<Object> createUser(@RequestBody
-	 * User user) { User savedUser = service.save(user);
-	 * 
-	 * URI location =
-	 * ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand
-	 * (savedUser.getId()) .toUri();
-	 * 
-	 * return ResponseEntity.created(location).build(); }
-	 */
+	@GetMapping("/users/{user_id}/posts/{post_id}")
+	public Post retrieveOneUser(@PathVariable int user_id, @PathVariable int post_id) {
+		Post post = service.findOnePost(user_id, post_id);
+
+		if (post == null)
+			throw new PostNotFoundException("Post not found for this id - " + post_id);
+
+		return post;
+	}
 }
