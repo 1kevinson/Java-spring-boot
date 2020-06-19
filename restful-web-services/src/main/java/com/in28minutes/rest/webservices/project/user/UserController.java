@@ -38,6 +38,13 @@ public class UserController {
 		if (user == null)
 			throw new UserNotFoundException("id - " + id);
 
+		// HATEOAS (Hypermedia as the Engine of Application State) is a constraint of
+		// the REST application architecture
+		// that keeps the RESTful style architecture unique from most other network
+		// application architectures.
+		// The term “hypermedia” refers to any content that contains links to other
+		// forms of media such as images, movies, and text.
+
 		// HATEOAS - Generate All links
 		EntityModel<User> model = new EntityModel<User>(user);
 		WebMvcLinkBuilder link = linkTo(methodOn(this.getClass()).retrieveAllUsers());
