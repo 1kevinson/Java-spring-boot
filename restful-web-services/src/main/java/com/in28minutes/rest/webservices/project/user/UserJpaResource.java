@@ -39,15 +39,12 @@ public class UserJpaResource {
 
 	@DeleteMapping("/jpa/users/{id}")
 	public void deleteOneUSer(@PathVariable int id) {
-		User user = service.deleteById(id);
-
-		if (user == null)
-			throw new UserNotFoundException("no user found for id - " + id);
+		userRepository.deleteById(id);
 	}
 
 	@PostMapping("/jpa/users")
 	public ResponseEntity<Object> createUser(@Valid @RequestBody User user) {
-		User savedUser = service.save(user);
+		User savedUser = userRepository.saveAndFlush(user);
 
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getId())
 				.toUri();
