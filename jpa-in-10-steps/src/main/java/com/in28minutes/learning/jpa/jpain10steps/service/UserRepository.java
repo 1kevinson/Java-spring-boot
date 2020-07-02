@@ -6,4 +6,9 @@ import com.in28minutes.learning.jpa.jpain10steps.entity.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
+	/**
+	 * @JpaRepository is a better way to manage a entity because it's avoid using
+	 *                lots of DaoServices
+	 */
+
 }
