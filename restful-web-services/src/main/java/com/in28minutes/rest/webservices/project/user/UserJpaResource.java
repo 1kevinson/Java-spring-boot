@@ -22,6 +22,9 @@ public class UserJpaResource {
 	@Autowired
 	private UserRepository userRepository;
 
+	@Autowired
+	private PostRepository postRepository;
+
 	@GetMapping("/jpa/users")
 	public List<User> retrieveAllUsers() {
 		return userRepository.findAll();
@@ -57,5 +60,21 @@ public class UserJpaResource {
 			throw new UserNotFoundException("User doesn't exists");
 
 		return user.get().getPosts();
+	}
+
+	@PostMapping("/jpa/users/{id}/posts")
+	public ResponseEntity<Object> createUser(@PathVariable int id, @RequestBody Post post) {
+		Optional<User> user = userRepository.findById(id);
+
+		if (!user.isPresent())
+			throw new UserNotFoundException("User doesn't exists");
+
+		post.setUser(user.get());
+		postRepository.saveAndFlush(post);
+
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(post.getId())
+				.toUri();
+
+		return ResponseEntity.created(location).build();
 	}
 }
