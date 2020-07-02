@@ -1,5 +1,7 @@
 package com.in28minutes.learning.jpa.jpain10steps;
 
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +24,8 @@ public class UserRepositoryCommandLineRunner implements CommandLineRunner {
 		User user = new User("Jack", "Admin");
 		userRepository.save(user);
 		log.info("New user is created > " + user);
+
+		Optional<User> userWithIdOne = userRepository.findById(1L);
+		log.info("New user is retrieved > " + userWithIdOne);
 	}
 }
